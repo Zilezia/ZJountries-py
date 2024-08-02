@@ -22,15 +22,15 @@
 # https://x.com/JrezcI
 
 import json
-
-# data_path = "./src/test_data.json"
-data_path = "./src/data.json"
-
-with open(data_path) as file:
-    data = json.load(file)
+import pkg_resources
 
 def get_place(by=None, value=None, fullText=False, fields=None):
     
+    data_path = pkg_resources.resource_filename(__name__, 'data.json')
+    # data_path = "./src/ZJountries/data.json"
+    with open(data_path) as file:
+        data = json.load(file)
+        
     matching_data = []
     
     if by is not None and value is not None:
@@ -100,6 +100,3 @@ def get_place(by=None, value=None, fullText=False, fields=None):
         return filtered_data
 
     return matching_data
-
-print(get_place(by='continents', value='europe', fields='name'))
-# print(get_place(by='capital', value='warsaw', fields=['name', 'afgrsgsf']))
